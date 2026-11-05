@@ -42,4 +42,4 @@ Upload the whole folder as-is to GitHub Pages / Netlify / Vercel / any static ho
 - Placeholder prices `[السعر]` for 4 of 5 products; placeholder product descriptions.
 - Wrist photos exist only for the watches (2 of 3 slots); other products show an empty "photo" slot.
 - Footer links are `#`.
-- Fonts (IBM Plex Sans Arabic, Aref Ruqaa) load from Google Fonts.
+- Fonts are local Thmanyah files in `fonts/`: Thmanyah Sans for interface text, Thmanyah Serif Display for headings.
