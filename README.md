@@ -43,3 +43,11 @@ Upload the whole folder as-is to GitHub Pages / Netlify / Vercel / any static ho
 - Wrist photos exist only for the watches (2 of 3 slots); other products show an empty "photo" slot.
 - Footer links are `#`.
 - Fonts are local Thmanyah files in `fonts/`: Thmanyah Sans for interface text, Thmanyah Serif Display for headings.
+
+## v62 notes (client feedback pass)
+- UI colors converted to white/black/gray only (product photos untouched).
+- Hero: «قطع حصرية» in Helvetica (+ Thmanyah Sans for Arabic glyphs), «بهوية سعودية» in Thmanyah Serif Display. Hero carousel now has 5 3D pieces incl. safety-pin bracelet (`اسوارة أمان`).
+- Home shows 6 cards (3×2) incl. «سعودي تايم هير» as the women's watch; «كل المنتجات» opens `#all-view` with every card.
+- Product pages use the plain photos (`shot`) – no 3D. 3D remains only in the hero carousel and the pour section.
+- Card/product backgrounds use `assets/e860…svg` (the identity pattern from the client's PDF, unmodified); friezes use `assets/e33d…svg`.
+- Pending: mug interior (needs reference image).
