@@ -1,7 +1,9 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>بي بوتيك</title>
 <script src="./support.js"></script>
@@ -228,8 +230,22 @@ html[data-theme=dark] .lockImg{filter:invert(1)}
 .catPill{display:inline-flex;align-items:center;height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:inherit;font-family:var(--font-ui);font-size:15px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
 .catPill .ci{display:none}
 .catPill .cl{font-size:15px;font-weight:500;color:inherit}
-.catPill:hover{border-color:var(--ink)}
-.catPill.on{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.catRail{gap:10px;border:0;padding:0;margin:28px 0 32px}
+.catPill{height:46px;padding:0 18px;border:1px solid var(--line2)!important;border-radius:999px;background:transparent!important;color:var(--ink);font-size:14px;font-weight:500}
+.catPill .cl{font-size:14px;font-weight:500}
+.catPill:after{display:none}
+.catPill:hover{border-color:var(--ink)!important}
+.catPill.on{background:var(--ink)!important;color:var(--on-ink);border-color:var(--ink)!important}
+#catRail{position:relative;display:block;margin:28px 0 32px}
+.catBox{height:46px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:inherit;font-family:var(--font-ui);font-size:14px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+.catBox:hover,.catRail.open .catBox{border-color:var(--ink)}
+.catCh{transition:transform .25s}.catRail.open .catCh{transform:rotate(180deg)}
+.catMenu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;min-width:220px;padding:8px;border-radius:22px;border:1px solid var(--line2);background:var(--bg);box-shadow:0 24px 50px -24px rgba(0,0,0,.35);display:none;flex-direction:column;gap:2px}
+.catRail.open .catMenu{display:flex;animation:cmIn .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes cmIn{from{opacity:0;transform:translateY(-6px)}}
+.catMenu .catPill{height:44px;border:0!important;border-radius:14px;justify-content:flex-start;width:100%}
+.catMenu .catPill:hover{background:var(--field)!important}
+.catMenu .catPill.on{background:var(--ink)!important;color:var(--on-ink)}
 @media(max-width:720px){.catRail{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.catPill{flex:none}}
 .homeGrid .pCard2[hidden]{display:none}
 .homeGrid .pCard2{animation:cardIn .5s cubic-bezier(.2,.8,.2,1) both}
@@ -255,6 +271,7 @@ html[data-theme=dark] .lockImg{filter:invert(1)}
 .zpPanel{position:relative;border:1px solid var(--line);border-radius:36px;padding:56px 40px 44px;display:flex;flex-direction:column;align-items:center;gap:6px;overflow:hidden;background:var(--bg);color:var(--ink)}
 html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .zpHint{display:none!important}
+.zpJug{touch-action:none}
 .zpTitle{margin:0;font-family:var(--font-display);font-size:clamp(40px,4.6vw,64px);line-height:1.25;font-weight:900;text-align:center}
 .zpHint{margin:0;font-family:var(--font-ui);font-size:14px;color:var(--m3);transition:opacity .3s}
 .zpStage{position:relative;width:min(560px,100%);height:590px;touch-action:pan-y;user-select:none;-webkit-user-select:none;margin-top:12px}
@@ -294,7 +311,9 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .zpCart{height:38px;padding:0 18px;border-radius:999px;border:0;background:var(--ink);color:var(--on-ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}.zpCart.ok{background:transparent;color:var(--ink);border:1px solid var(--line2);pointer-events:none}
 .zpReset{height:38px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:transparent;color:var(--ink);font:inherit;font-size:14px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
 .zpReset.on{opacity:1;pointer-events:auto}
-@media(max-width:620px){.zpPanel{padding:40px 16px 32px}.zpStage{transform:scale(.62);transform-origin:50% 0;height:370px;width:560px;margin-left:calc((100% - 560px)/2)}}
+@media(max-width:620px){.zpPanel{padding:28px 12px 24px}.zpStage{transform:scale(.62);transform-origin:50% 0;height:590px;width:500px;align-self:center;margin-left:0;margin-top:-74px;margin-bottom:-224px}}
+@media(max-width:620px){.zpBar{gap:10px;flex-wrap:wrap;justify-content:center}.zpMeter{width:110px}.zpCart,.zpReset{white-space:nowrap;padding:0 14px;font-size:13px;height:34px}}
+@media(max-width:380px){.zpStage{transform:scale(.56);margin-top:-66px;margin-bottom:-260px}}
 .logoFloat{position:fixed;top:12px;left:16px;z-index:80;display:flex;align-items:center;flex-direction:row-reverse;gap:10px;padding:8px 16px 8px 10px;border-radius:999px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);box-shadow:0 10px 30px -14px rgba(0,0,0,.35);color:var(--ink);text-decoration:none;direction:rtl;transform:translateY(-90px);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
 .logoFloat.on{transform:none;opacity:1;pointer-events:auto}
 .logoFloat img{height:34px;width:auto;display:block}
@@ -409,10 +428,36 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 
 
 /* معاينة: زخرفة على كامل الموقع (للقرار فقط) */
-.optToggle{position:fixed;left:16px;bottom:16px;z-index:95;height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:var(--bg);color:var(--ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 8px 24px -12px rgba(0,0,0,.35)}
-body.fullOrn:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url(assets/e33da441b1b35d0bd32dd59ffd2d3454.svg) 0 0/auto 92px repeat;opacity:.075}
-body.fullOrn #home-view>section:not(.voice),body.fullOrn #product-view>section{position:relative;z-index:1}
-html[data-theme=dark] body.fullOrn:before{filter:invert(1);opacity:.1}
+
+/* mobile polish */
+@media(max-width:560px){
+.pName{font-size:17px}.pPrice{font-size:13px}
+.enLine{font-size:25px!important}
+.enPlate{padding:56px 20px 20px!important;min-height:250px!important}
+.enSigImg{height:34px}
+.heroSaudi{padding-left:20px;padding-right:20px}
+}
+/* reviews */
+.rvSec{padding:72px 48px 64px}
+.rvHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.rvHead h2{margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(24px,2.6vw,34px)}
+.rvNav{display:flex;gap:10px}
+.rvNav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.rvNav button:hover{border-color:var(--ink)}
+.rvTrack{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.rvTrack::-webkit-scrollbar{display:none}
+.rvCard{flex:0 0 calc((100% - 40px)/3);scroll-snap-align:start;border:1px solid var(--line);border-radius:28px;padding:30px 28px;display:flex;flex-direction:column;gap:16px;background:var(--bg)}
+html[data-theme=dark] .rvCard{background:#111;border-color:#2a2a2a}
+.rvQ{font-family:var(--font-display);font-weight:900;font-size:54px;line-height:.6;height:26px;color:var(--ink)}
+.rvStars{display:flex;gap:4px;color:var(--ink)}
+.rvTxt{margin:0;font-size:16px;line-height:1.9;color:var(--ink)}
+.rvWho{display:flex;align-items:center;gap:12px;margin-top:auto}
+.rvAv{width:44px;height:44px;border-radius:50%;background:var(--field);display:grid;place-items:center;color:var(--ink);font-weight:700}
+.rvWho b{font-size:15px}
+@media(max-width:900px){.rvCard{flex-basis:calc((100% - 20px)/2)}}
+@media(max-width:560px){footer>div{padding-left:20px!important;padding-right:20px!important;gap:28px!important}footer *{min-width:0}footer input{width:100%;min-width:0}}
+@media(max-width:400px){.brandLock .lockImg{height:40px}.brandLock{gap:8px}.topbar{padding:10px 12px;gap:8px}.burger{padding:0;width:42px;height:42px;justify-content:center}.burger span,.burger #catLbl{display:none}.hActs button[aria-label="السلة"]{padding:0 12px}}
+@media(max-width:560px){.rvSec{padding:48px 16px 40px}.rvCard{flex-basis:88%}.rvNav button{width:40px;height:40px}}
 /* gift card */
 .enPlate{background:#fffdfa!important;color:#111!important;border-radius:14px!important;box-shadow:0 34px 60px -30px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.06);padding:64px 40px 30px!important;min-height:340px!important;gap:26px!important;transform-origin:50% 100%;position:relative;overflow:hidden}
 .enPlate:before{content:"";position:absolute;left:18px;right:18px;top:16px;height:30px;background:url(assets/e33da441b1b35d0bd32dd59ffd2d3454.svg) repeat-x center/auto 100%;opacity:.5}
@@ -542,7 +587,7 @@ footer .frieze:before{filter:invert(1)}
 <sc-for list="{{stage}}" as="p" hint-placeholder-count="5">
 <button aria-label="{{p.name}}" tabindex="{{p.tab}}" onClick="{{p.pick}}" style="{{p.stageStyle}}"><img src="{{p.poster}}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transform:scale({{p.fit}})"></button>
 </sc-for>
-<model-viewer id="hero-viewer" src="{{cur.src}}" poster="{{cur.poster}}" alt="{{cur.alt}}" min-camera-orbit="-75deg 55deg auto" max-camera-orbit="75deg 100deg 600%" camera-controls="" disable-zoom="" disable-pan="" interaction-prompt="none" shadow-intensity="0" exposure="1" environment-image="neutral" camera-orbit="0deg 76deg {{cur.orbitR}}" reveal="auto" style="position:absolute;top:0;left:50%;margin-left:-140px;width:280px;height:290px;background:transparent;cursor:grab"></model-viewer>
+<model-viewer id="hero-viewer" src="{{cur.src}}" poster="{{cur.poster}}" alt="{{cur.alt}}" min-camera-orbit="-75deg 55deg auto" max-camera-orbit="75deg 100deg 600%" camera-controls="" disable-zoom="" disable-pan="" interaction-prompt="none" shadow-intensity="0" exposure="1" environment-image="neutral" camera-orbit="0deg 76deg {{cur.orbitR}}" reveal="auto" style="position:absolute;top:0;left:50%;margin-left:-140px;width:280px;height:290px;background:transparent;cursor:grab;z-index:2"></model-viewer>
 </div>
 </div>
 <h1 class="heroTitle">قطع حصرية بهوية سعودية</h1>
@@ -556,7 +601,7 @@ footer .frieze:before{filter:invert(1)}
 <a href="#" onClick="{{openAll}}" style="height:50px;padding:0 26px;border:1px solid var(--ink);border-radius:999px;display:flex;align-items:center;gap:10px;font-weight:500">كل المنتجات<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12H4M10 6l-6 6 6 6"></path></svg></a>
 </div>
 
-<div class="catRail" id="catRail" role="group" aria-label="تصنيفات المنتجات"><button type="button" class="catPill on" data-c="all"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">الكل</span></button><button type="button" class="catPill" data-c="ساعات"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">ساعات</span></button><button type="button" class="catPill" data-c="تحف"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">تحف</span></button><button type="button" class="catPill" data-c="أكواب"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">أكواب</span></button><button type="button" class="catPill" data-c="ذهب ومجوهرات"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">ذهب ومجوهرات</span></button></div>
+<div class="catRail" id="catRail" role="group" aria-label="تصنيفات المنتجات"><button type="button" class="catBox" id="catBox" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span id="catBoxL">التصنيفات</span><svg class="catCh" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="catMenu" id="catMenu"><button type="button" class="catPill on" data-c="all"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">الكل</span></button><button type="button" class="catPill" data-c="ساعات"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">ساعات</span></button><button type="button" class="catPill" data-c="تحف"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">تحف</span></button><button type="button" class="catPill" data-c="أكواب"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">أكواب</span></button><button type="button" class="catPill" data-c="ذهب ومجوهرات"><span class="ci"><i class="cr"></i><i class="cb"></i><b></b></span><span class="cl">ذهب ومجوهرات</span></button></div></div>
 
 <div class="productGrid homeGrid">
 <sc-for list="{{homeCards}}" as="g" hint-placeholder-count="6">
@@ -609,6 +654,8 @@ footer .frieze:before{filter:invert(1)}
 </div>
 </section>
 
+<section class="rvSec" id="reviews"><div class="rvHead"><h2>آراء العملاء</h2><div class="rvNav"><button type="button" id="rvPrev" aria-label="السابق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" id="rvNext" aria-label="التالي"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button></div></div><div class="rvTrack" id="rvTrack"><article class="rvCard"><div class="rvQ">“</div><div class="rvStars" aria-label="5 من 5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div><p class="rvTxt">[نص رأي العميل]</p><div class="rvWho"><span class="rvAv">؟</span><b>[اسم العميل]</b></div></article><article class="rvCard"><div class="rvQ">“</div><div class="rvStars" aria-label="5 من 5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div><p class="rvTxt">[نص رأي العميل]</p><div class="rvWho"><span class="rvAv">؟</span><b>[اسم العميل]</b></div></article><article class="rvCard"><div class="rvQ">“</div><div class="rvStars" aria-label="5 من 5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div><p class="rvTxt">[نص رأي العميل]</p><div class="rvWho"><span class="rvAv">؟</span><b>[اسم العميل]</b></div></article><article class="rvCard"><div class="rvQ">“</div><div class="rvStars" aria-label="5 من 5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div><p class="rvTxt">[نص رأي العميل]</p><div class="rvWho"><span class="rvAv">؟</span><b>[اسم العميل]</b></div></article><article class="rvCard"><div class="rvQ">“</div><div class="rvStars" aria-label="5 من 5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18l-6.5 4 1.7-7.4-5.7-5 7.5-.7z"/></svg></div><p class="rvTxt">[نص رأي العميل]</p><div class="rvWho"><span class="rvAv">؟</span><b>[اسم العميل]</b></div></article></div></section>
+
 <section class="voice engr" id="engrave">
 <div class="enHead"><h2 class="enTitle">اكتب إهداءك، ونرفقه في كرت مع مشترياتك</h2></div>
 <div class="enChips" id="en-chips" role="group" aria-label="اختر القطعة"><button class="enChip on" type="button" data-i="0" data-img="assets/set-cup.jpg" data-n="كوب السفر"><img src="assets/set-cup.jpg" alt=""><span>كوب السفر</span></button><button class="enChip" type="button" data-i="1" data-img="assets/set-watches.jpg" data-n="ساعات سعودي تايم"><img src="assets/set-watches.jpg" alt=""><span>ساعات سعودي تايم</span></button><button class="enChip" type="button" data-i="2" data-img="assets/set-globe.jpg" data-n="محور الكون"><img src="assets/set-globe.jpg" alt=""><span>محور الكون</span></button><button class="enChip" type="button" data-i="3" data-img="assets/set-bisht.jpg" data-n="مجسم البشت"><img src="assets/set-bisht.jpg" alt=""><span>مجسم البشت</span></button><button class="enChip" type="button" data-i="4" data-img="assets/set-ring.jpg" data-n="خاتم ذهبي"><img src="assets/set-ring.jpg" alt=""><span>خاتم ذهبي</span></button><button class="enChip" type="button" data-i="5" data-img="assets/set-heart.jpg" data-n="قلادة حب"><img src="assets/set-heart.jpg" alt=""><span>قلادة حب</span></button><button class="enChip" type="button" data-i="6" data-img="assets/set-bag.jpg" data-n="الحقيبة"><img src="assets/set-bag.jpg" alt=""><span>الحقيبة</span></button></div>
@@ -629,7 +676,7 @@ footer .frieze:before{filter:invert(1)}
 </div>
 </section>
 
-</div><button type="button" class="optToggle" id="optToggle">معاينة: زخرفة على كامل الموقع</button><footer style="background:var(--bar);color:var(--bar-t);margin-top:0">
+</div><footer style="background:var(--bar);color:var(--bar-t);margin-top:0">
 <div class="frieze" aria-hidden="true"></div>
 <div style="padding:56px 48px 28px;display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between">
 <div style="flex:1 1 280px;max-width:360px">
@@ -692,7 +739,7 @@ class Component extends DCLogic {
     if (!slot || !this._pourUrl || document.getElementById('pour-viewer')) return;
     const v = document.createElement('model-viewer');
     v.id = 'pour-viewer';
-    const at = { src: this._pourUrl, 'animation-name': 'pour', 'disable-zoom': '', 'disable-pan': '', 'interaction-prompt': 'none', 'shadow-intensity': '0', 'shadow-softness': '0', exposure: '1', 'environment-image': 'neutral', 'camera-orbit': '15deg 62deg 105%', 'min-camera-orbit': '-75deg 40deg auto', 'max-camera-orbit': '75deg 100deg 600%', reveal: 'auto', poster: 'assets/e90ad27fd103fcb0d221fa93ee647758.png', alt: 'كوب سفر مزخرف تُسكب فيه القهوة' };
+    const at = { src: this._pourUrl, 'animation-name': 'pour', 'disable-zoom': '', 'disable-pan': '', 'interaction-prompt': 'none', 'shadow-intensity': '0', 'shadow-softness': '0', exposure: '1', 'environment-image': 'neutral', 'camera-orbit': '15deg 62deg 105%', 'min-camera-orbit': '-75deg 40deg auto', 'max-camera-orbit': '75deg 100deg 600%', reveal: 'auto', poster: 'assets/poster-cup-matte.png', alt: 'كوب سفر مزخرف تُسكب فيه القهوة' };
     Object.keys(at).forEach((k) => v.setAttribute(k, at[k]));
     v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;background:transparent;pointer-events:none;direction:ltr';
     slot.appendChild(v);
@@ -1034,10 +1081,11 @@ class Component extends DCLogic {
   }
   pvInfo(i) {
     const D = [
-      { desc: '«محور الكون»: كرة أرضية بقاعدة نحاسية، تبرز الجزيرة العربية بالذهب. قطعة تزيّن مكتبك أو مجلسك.', g: 'في مكتبك' },
       { desc: 'ساعتان من «سعودي تايم»: واحدة بوجه فضي وأخرى بوجه أخضر، بسوار معدني أنيق.', g: 'على المعصم' },
       { desc: 'كوب سفر بنقوش تراثية، تاخذ قهوتك معك أينما كنت.', g: 'معك في الطريق' },
       { desc: 'مجسم لرجل بالبشت على قاعدة منحوتة، من التراث لزاوية بيتك.', g: 'في مجلسك' },
+      { desc: '«محور الكون»: كرة أرضية بقاعدة نحاسية، تبرز الجزيرة العربية بالذهب. قطعة تزيّن مكتبك أو مجلسك.', g: 'في مكتبك' },
+      { desc: 'أسورة ذهبية بتصميم دبوس الأمان.', g: 'على المعصم' },
       { desc: 'خاتم ذهبي بتصميم متشابك ناعم، قطعة تلبسها كل يوم.', g: 'على اليد' },
     ];
     return D[i] || D[0];
@@ -1342,19 +1390,33 @@ class Component extends DCLogic {
     }, { threshold: [0, 0.6] });
     this._io1.observe(stage);
   }
+  heroMap() {
+    const m = [];
+    this.pieces().forEach((q, i) => { if (!q.gridOnly) m.push(i); });
+    return m;
+  }
   loadModel(i) {
     this._urls = this._urls || {};
     this._loading = this._loading || {};
     if (this._urls[i] || this._loading[i]) return;
+    const src = this.pieces()[i] && this.pieces()[i].data;
+    if (!src) return;
     this._loading[i] = true;
-    fetch(this.pieces()[i].data)
+    const done = (blob) => {
+      this._urls[i] = URL.createObjectURL(blob);
+      this.forceUpdate();
+    };
+    if (/\.glb(\?|$)/i.test(src)) {
+      fetch(src).then((r) => { if (!r.ok) throw new Error('glb'); return r.blob(); }).then((b) => done(new Blob([b], { type: 'model/gltf-binary' }))).catch(() => { this._loading[i] = false; });
+      return;
+    }
+    fetch(src)
       .then((r) => r.text())
       .then((b64) => {
         const bin = atob(b64.trim());
         const bytes = new Uint8Array(bin.length);
         for (let k = 0; k < bin.length; k++) bytes[k] = bin.charCodeAt(k);
-        this._urls[i] = URL.createObjectURL(new Blob([bytes], { type: 'model/gltf-binary' }));
-        this.forceUpdate();
+        done(new Blob([bytes], { type: 'model/gltf-binary' }));
       })
       .catch(() => { this._loading[i] = false; });
   }
@@ -1375,6 +1437,21 @@ class Component extends DCLogic {
       const now = performance.now();
       const dt = now - this._last;
       this._last = now;
+      const cidx = (this.state && this.state.idx) || 0;
+      if (this._swIdx === undefined) this._swIdx = cidx;
+      if (cidx !== this._swIdx) { this._swIdx = cidx; this._spin0 = now; this._phase = 0; this._sync = false; }
+      if (this._spin0) {
+        const u = Math.min(1, (now - this._spin0) / 1500);
+        if (u >= 1) { this._spin0 = 0; }
+        else {
+          const ease = 1 - Math.pow(1 - u, 3), bell = Math.sin(Math.PI * u);
+          const spinPiece = this.pieces()[this.heroMap()[cidx]] || {};
+        const R0 = parseFloat(spinPiece.orbitR || '165') || 165;
+          const az = -62 * Math.exp(-3.2 * u) * Math.cos(2 * Math.PI * 1.1 * u);
+          v.cameraOrbit = az.toFixed(1) + 'deg ' + (76 - 8 * bell).toFixed(1) + 'deg ' + (R0 * (1 + 0.1 * bell)).toFixed(0) + '%';
+          return;
+        }
+      }
       if (this._drag || now < (this._resume || 0)) return;
       if (this._sync) {
         this._sync = false;
@@ -1386,7 +1463,8 @@ class Component extends DCLogic {
       if (this._hover) return;
       this._phase += (dt * 2 * Math.PI) / T;
       const idx = (this.state && this.state.idx) || 0;
-      const r = this.pieces()[idx].orbitR || '165%';
+      const swingPiece = this.pieces()[this.heroMap()[idx]] || {};
+      const r = swingPiece.orbitR || '165%';
       v.cameraOrbit = (A * Math.sin(this._phase)).toFixed(1) + 'deg 76deg ' + r;
     }, 33);
   }
@@ -1405,8 +1483,7 @@ class Component extends DCLogic {
     this.startSwing();
     setTimeout(() => this.watchPour(), 400);
     try { customElements.get('model-viewer').meshoptDecoderLocation = 'assets/ea9a1fc9a7eb92d851502e4976a30459.js'; } catch (e) {}
-    this.loadModel(0);
-    this.loadModel(1);
+    this.heroMap().forEach((pi) => this.loadModel(pi));
     this._hover = false;
     this._paused = false;
     const s = (this.props.rotateEvery ?? 9) * 1000;
@@ -1421,11 +1498,11 @@ class Component extends DCLogic {
   pieces() {
     const P = '[السعر] ر.س';
     return [
-      { data: 'assets/9f6bfeb43ad775e80fd4eca11809d54d.txt', poster: 'assets/04d6fe14b0fea586f258e08b697c4835.png', shot: 'assets/set-globe.jpg?v=1', tint: '#dfdfdf', name: 'محور الكون', sub: 'مجسم ذهبي', price: '320 ر.س', alt: 'مجسم كرة أرضية ذهبية للجزيرة العربية' },
-      { data: 'assets/adf6c10757420582c38c68f5123292e5.txt', poster: 'assets/f1f9ba1a7bf7cabfd713529caaa3e645.png', shot: 'assets/set-watches.jpg?v=1', tint: '#c0c0c0', name: 'ساعات سعودي تايم', sub: 'ساعتان بفضي وأخضر', price: P, alt: 'ساعتان فاخرتان من سعودي تايم', orbitR: '195%' },
-      { data: 'assets/813cdcd57645d7febb9f142f3e0d618e.txt', poster: 'assets/e90ad27fd103fcb0d221fa93ee647758.png', shot: 'assets/set-cup.jpg?v=1', tint: '#dcdcdc', name: 'كوب السفر', sub: 'كوب مزخرف', price: P, alt: 'كوب سفر مزخرف بنقوش تراثية', orbitR: '195%' },
+      { data: 'assets/adf6c10757420582c38c68f5123292e5.txt', poster: 'assets/poster-watches-matte.png', shot: 'assets/set-watches.jpg?v=1', tint: '#c0c0c0', name: 'ساعات سعودي تايم', sub: 'ساعتان بفضي وأخضر', price: P, alt: 'ساعتان فاخرتان من سعودي تايم', orbitR: '195%' },
+      { data: 'assets/813cdcd57645d7febb9f142f3e0d618e.txt', poster: 'assets/poster-cup-matte.png', shot: 'assets/set-cup.jpg?v=1', tint: '#dcdcdc', name: 'كوب السفر', sub: 'كوب مزخرف', price: P, alt: 'كوب سفر مزخرف بنقوش تراثية', orbitR: '195%' },
       { data: 'assets/00046d4f81f4a7f8efdeb3969cd086ba.txt', poster: 'assets/3f68b20bbcd2278c3f22519337595c70.png', shot: 'assets/set-bisht.jpg?v=1', tint: '#dcdcdc', name: 'مجسم البشت', sub: 'بني', price: P, alt: 'مجسم بشت بني', orbitR: '118%' },
-      { data: 'assets/ba904c54e32fdb7b1180a63e34fdd183.txt', poster: 'assets/b4e6fec7d5bb702d0ea6cb37d1b58b8a.png', shot: 'assets/b4e6fec7d5bb702d0ea6cb37d1b58b8a.png', tint: '#dfdfdf', name: 'اسوارة أمان', sub: 'ذهبي', price: P, alt: 'اسوارة ذهبية بتصميم دبوس الأمان', desc: 'اسوارة بتصميم دبوس الأمان بلمسة ذهبية ناعمة.', orbitR: '150%' },
+      { data: 'assets/9f6bfeb43ad775e80fd4eca11809d54d.txt', poster: 'assets/04d6fe14b0fea586f258e08b697c4835.png', shot: 'assets/set-globe.jpg?v=1', tint: '#dfdfdf', name: 'محور الكون', sub: 'مجسم ذهبي', price: '320 ر.س', alt: 'مجسم كرة أرضية ذهبية للجزيرة العربية', gridOnly: true },
+      { data: 'assets/ba904c54e32fdb7b1180a63e34fdd183.txt', poster: 'assets/b4e6fec7d5bb702d0ea6cb37d1b58b8a.png', shot: 'assets/b4e6fec7d5bb702d0ea6cb37d1b58b8a.png', tint: '#dfdfdf', name: 'اسوارة أمان', sub: 'ذهبي', price: P, alt: 'اسوارة ذهبية بتصميم دبوس الأمان', desc: 'اسوارة بتصميم دبوس الأمان بلمسة ذهبية ناعمة.', orbitR: '150%', gridOnly: true },
       { data: 'assets/daee4269ab5e9bf0b51a9b315488b6d7.txt', poster: 'assets/d303ae1cf4789e3698293e99d159e5ef.png', shot: 'assets/set-ring.jpg?v=1', tint: '#D9E0E4', name: 'خاتم ذهبي', sub: 'خاتم بتصميم متشابك', price: P, alt: 'خاتم ذهبي بتصميم متشابك', orbitR: '135%', gridOnly: true },
       { shot: 'assets/set-kleija.jpg?v=1', name: 'كليجا', sub: 'قلادة مطلية بالذهب', price: '180 ر.س', alt: 'قلادة كليجا مطلية بالذهب', desc: 'قلادة مطلية بالذهب، تعليقة مستديرة على نقش الكليجا.', gridOnly: true },
       { shot: 'assets/set-mugs.jpg?v=1', name: 'المق', sub: 'كوب حافظ للحرارة', price: '140 ر.س', alt: 'ثلاثة أكواب سفر بنفسجي وأبيض وأسود', desc: 'ثلاثة أكواب سفر تحفظ الحرارة: بنفسجي، وأبيض، وأسود.', gridOnly: true },
@@ -1440,23 +1517,72 @@ class Component extends DCLogic {
       { shot: 'assets/set-baloot.jpg?v=1', name: 'بلوت', sub: 'ورق لعب', price: '20 ر.س', alt: 'ورق بلوت', desc: 'ورق بلوت برسوم سعودية وظهر بنفسجي.', gridOnly: true },
       { shot: 'assets/set-band.jpg?v=1', name: 'سير الساعة', sub: 'سوار معدني', price: '119 ر.س', alt: 'سوار ساعة معدني أسود', desc: 'سوار معدني أسود بنقش متداخل.', gridOnly: true },
       { shot: 'assets/set-scarf.jpg?v=1', name: 'وشاح السعودية', sub: 'ثلاثة أوشحة', price: '180 ر.س', alt: 'ثلاثة أوشحة بنقش هندسي', desc: 'ثلاثة أوشحة بنقش هندسي: أسود، وأخضر، وبنفسجي.', gridOnly: true },
-      { shot: 'assets/set-wallet.jpg?v=1', name: 'العلا', sub: 'محفظة بطاقات', price: P, alt: 'محفظة بطاقات جلدية', desc: 'محفظة بطاقات من الجلد.', gridOnly: true },
+      { data: '3d/04-العلا.glb', poster: 'assets/set-wallet.jpg?v=1', shot: 'assets/set-wallet.jpg?v=1', tint: '#d8d4cf', name: 'العلا', sub: 'محفظة بطاقات', price: P, alt: 'محفظة بطاقات جلدية', desc: 'محفظة بطاقات من الجلد.', orbitR: '165%' },
+      { data: '3d/02-قلادة-جدة.glb', poster: 'assets/set-jeddah.jpg?v=1', shot: 'assets/set-jeddah.jpg?v=1', tint: '#d7d7d7', name: 'قلادة جدة', sub: 'ستانلس ستيل', price: '220 ر.س', alt: 'قلادة فضية على شكل كلمة جدة', desc: 'قلادة ستانلس ستيل على شكل كلمة جدة.', orbitR: '155%' },
       { shot: 'assets/set-bag.jpg?v=1', name: 'الحقيبة', sub: 'حقيبة كتف', price: P, alt: 'حقيبة سوداء بنقش أبيض', desc: 'حقيبة كتف سوداء بنقش أبيض.', gridOnly: true }
     ];
   }
   go(d, auto) {
-    const n = this.pieces().filter((q) => !q.gridOnly).length;
+    const map = this.heroMap();
+    const n = map.length;
     const i = (((this.state && this.state.idx) || 0) + d + n) % n;
     if (!auto) this._paused = true;
-    this.loadModel(i);
-    this.loadModel((i + 1) % n);
+    this.loadModel(map[i]);
+    this.loadModel(map[(i + 1) % n]);
     this.setState({ idx: i });
   }
+  placeSideModels() {
+    const host = document.querySelector('#hero-stage > div');
+    if (!host) return;
+    const specs = [
+      { name: 'العلا', orbit: '38deg 68deg 145%' },
+      { name: 'قلادة جدة', orbit: '22deg 74deg 150%' }
+    ];
+    this._sideView = this._sideView || {};
+    specs.forEach((spec) => {
+      const btn = [...host.querySelectorAll('button')].find((b) => b.getAttribute('aria-label') === spec.name);
+      if (!btn) return;
+      const pi = this.pieces().findIndex((p) => p.name === spec.name);
+      const src = this._urls && this._urls[pi];
+      if (!src) return;
+      let v = this._sideView[spec.name];
+      if (!v) {
+        v = document.createElement('model-viewer');
+        v.setAttribute('alt', '');
+        v.setAttribute('interaction-prompt', 'none');
+        v.setAttribute('shadow-intensity', '0');
+        v.setAttribute('exposure', '1');
+        v.setAttribute('environment-image', 'neutral');
+        v.setAttribute('camera-orbit', spec.orbit);
+        v.setAttribute('disable-zoom', '');
+        v.setAttribute('disable-pan', '');
+        v.style.background = 'transparent';
+        v.style.pointerEvents = 'none';
+        v.style.zIndex = '1';
+        this._sideView[spec.name] = v;
+      }
+      if (v.parentElement !== host) host.appendChild(v);
+      if (v.getAttribute('src') !== src) v.setAttribute('src', src);
+      v.style.position = 'absolute';
+      v.style.top = btn.style.top;
+      v.style.left = btn.style.left;
+      v.style.width = btn.style.width;
+      v.style.height = btn.style.height;
+      v.style.marginLeft = btn.style.marginLeft;
+      v.style.transform = btn.style.transform;
+      v.style.opacity = btn.style.opacity;
+      v.style.filter = btn.style.filter;
+      v.style.transition = btn.style.transition;
+      const img = btn.querySelector('img');
+      if (img) img.style.visibility = 'hidden';
+    });
+  }
   componentDidUpdate() {
+    this.placeSideModels();
     if (this._view) this.showView(this._view);
     const cidx = (this.state && this.state.idx) || 0;
     const hv = document.getElementById('hero-viewer');
-    const want = this._urls && this._urls[cidx];
+    const want = this._urls && this._urls[this.heroMap()[cidx]];
     if (hv && want && hv.getAttribute('src') !== want) hv.setAttribute('src', want);
     if (this._lastIdx === cidx) return;
     this._lastIdx = cidx;
@@ -1465,19 +1591,20 @@ class Component extends DCLogic {
   }
   renderVals() {
     const all = this.pieces();
-    const list = all.filter((q) => !q.gridOnly);
+    const map = this.heroMap();
+    const list = map.map((pi) => all[pi]);
     const idx = (this.state && this.state.idx) || 0;
     const n = list.length;
-    const choose = (i) => { this._paused = true; this.loadModel(i); this.loadModel((i + 1) % n); this.setState({ idx: i }); };
+    const choose = (i) => { this._paused = true; this.loadModel(map[i]); this.loadModel(map[(i + 1) % n]); this.setState({ idx: i }); };
     const stage = list.map((p, i) => {
       let off = (((i - idx) % n) + n) % n;
       if (off > n / 2) off -= n;
       const ab = Math.abs(off);
       const x = -off * 215;
       const sc = ab === 0 ? 1 : ab === 1 ? 0.62 : 0.42;
-      const op = ab === 0 ? 0 : ab === 1 ? 0.6 : ab === 2 ? 0.25 : 0;
+      const op = ab === 0 ? 0 : ab === 1 ? 0.9 : ab === 2 ? 0.4 : 0;
       const bl = ab === 1 ? 1.5 : 3.5;
-      const stageStyle = 'position:absolute;top:18px;left:50%;width:210px;height:210px;margin-left:-105px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:blur(' + bl + 'px);pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
+      const stageStyle = 'position:absolute;top:18px;left:50%;width:210px;height:210px;margin-left:-105px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:blur(' + bl + 'px) brightness(.84) contrast(1.12) saturate(.85) drop-shadow(0 14px 14px rgba(0,0,0,.18));pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
       return { name: p.name, poster: p.poster, fit: p.fit || 1, stageStyle, tab: ab === 1 ? 0 : -1, pick: () => choose(i) };
     });
     const pieces = list.map((p, i) => ({
@@ -1490,7 +1617,7 @@ class Component extends DCLogic {
     }));
     return {
       gold: this.props.gold ?? '#111111',
-      discover: () => this.openProduct(idx),
+      discover: () => this.openProduct(map[idx]),
       openWatch: () => this.openProduct(1),
       openCup: () => this.openProduct(2),
       openBisht: () => this.openProduct(3),
@@ -1525,7 +1652,7 @@ class Component extends DCLogic {
       giftAgain: () => { this.giftAgain(); },
       pieces,
       stage,
-      cur: { ...list[idx], orbitR: list[idx].orbitR || '165%', src: (this._urls && this._urls[idx]) || undefined },
+      cur: { ...list[idx], orbitR: list[idx].orbitR || '165%', src: (this._urls && this._urls[map[idx]]) || undefined },
       gridPieces: all.map((p, i) => ({ ...p, card: (p.shot||'').replace(/^assets\/([^?]*?)(\.\w+)(\?.*)?$/,'assets/card/$1.jpg?v=2'), idx: i, open: (e) => { if (e && e.target && e.target.closest && e.target.closest('.pAdd')) return; this.openProduct(i); }, add: (e) => this.addToCart(e) })),
       homeCards: ['محور الكون', 'ساعات سعودي تايم', 'سعودي تايم هير', 'كوب السفر', 'مجسم البشت', 'اسوارة أمان'].map((n) => { const i = all.findIndex((q) => q.name === n); return { ...all[i], card: ((all[i]||{}).shot||'').replace(/^assets\/([^?]*?)(\.\w+)(\?.*)?$/,'assets/card/$1.jpg?v=2'), idx: i, open: (e) => { if (e && e.target && e.target.closest && e.target.closest('.pAdd')) return; this.openProduct(i); }, add: (e) => this.addToCart(e) }; }),
       openAll: (e) => { try { e && e.preventDefault && e.preventDefault(); } catch (_) {} this.openAll(); },
@@ -1579,7 +1706,7 @@ var al=t.closest('#en-al button');if(al){on(al.parentNode.children,al);$('en-txt
 })();
 </script>
 <script>
-(function(){var C={'محور الكون':'تحف','مجسم البشت':'تحف','ساعات سعودي تايم':'ساعات','سعودي تايم هير':'ساعات','كوب السفر':'أكواب','اسوارة أمان':'ذهب ومجوهرات'};
+(function(){var C={'محور الكون':'تحف','مجسم البشت':'تحف','ساعات سعودي تايم':'ساعات','سعودي تايم هير':'ساعات','كوب السفر':'أكواب','اسوارة أمان':'ذهب ومجوهرات','قلادة جدة':'ذهب ومجوهرات'};
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#catRail .catPill');if(!b)return;var rail=b.parentNode;[].forEach.call(rail.children,function(x){x.classList.toggle('on',x===b);x.classList.remove('pop')});void b.offsetWidth;b.classList.add('pop');var c=b.dataset.c;
 [].forEach.call(document.querySelectorAll('.homeGrid .pCard2'),function(el){var n=(el.querySelector('.pName')||{}).textContent||'';var show=c==='all'||C[n.trim()]===c;el.hidden=!show;if(show){el.style.animation='none';void el.offsetWidth;el.style.animation=''}})});
 function badge(){[].forEach.call(document.querySelectorAll('#catRail .catPill'),function(b){var c=b.dataset.c,n=0;[].forEach.call(document.querySelectorAll('.homeGrid .pCard2'),function(el){var t=((el.querySelector('.pName')||{}).textContent||'').trim();if(c==='all'||C[t]===c)n++});var x=b.querySelector('b');if(x&&n)x.textContent=n})}
@@ -1626,6 +1753,22 @@ window.addEventListener('scroll',f,{passive:true});window.addEventListener('resi
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('#logo-float');if(!a)return;e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
-<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#optToggle');if(!b)return;var on=document.body.classList.toggle('fullOrn');b.textContent=on?'رجوع للتصميم الحالي':'معاينة: زخرفة على كامل الموقع'});</script>
+
+<script>
+(function(){function matte(v){try{var m=v.model;if(!m||!m.materials)return;m.materials.forEach(function(mt){var pr=mt.pbrMetallicRoughness;try{pr.metallicRoughnessTexture.setTexture(null)}catch(e){}pr.setMetallicFactor(0);pr.setRoughnessFactor(.92)});v.setAttribute('shadow-intensity','0');v.exposure=.95}catch(e){}}
+document.addEventListener('load',function(e){var v=e.target;if(v&&v.tagName==='MODEL-VIEWER')matte(v)},true);
+document.querySelectorAll('model-viewer').forEach(function(v){if(v.loaded)matte(v)})})();
+</script>
+<script>
+document.addEventListener('click',function(e){var rail=document.getElementById('catRail');if(!rail)return;var bx=e.target.closest&&e.target.closest('#catBox');
+if(bx){var o=rail.classList.toggle('open');bx.setAttribute('aria-expanded',o);return}
+var pill=e.target.closest&&e.target.closest('#catMenu .catPill');
+if(pill){var c=pill.dataset.c,l=document.getElementById('catBoxL');if(l)l.textContent=c==='all'?'التصنيفات':'التصنيفات: '+pill.textContent.replace(/\s*\d+\s*$/,'').trim();rail.classList.remove('open');return}
+if(!e.target.closest('#catRail'))rail.classList.remove('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var r=document.getElementById('catRail');if(r)r.classList.remove('open')}});
+</script>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#rvPrev,#rvNext');if(!b)return;var tr=document.getElementById('rvTrack'),s=tr.firstElementChild.getBoundingClientRect().width+20;tr.scrollBy({left:(b.id==='rvNext'?-s:s),behavior:'smooth'})});</script>
 </body>
 </html>
+
+</body></html>

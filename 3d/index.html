@@ -66,5 +66,22 @@ model-viewer{width:100%;height:320px;background:#fafafa}
 <div class="card"><h2>محور الكون</h2><span>21-محور-الكون.glb</span><model-viewer src="21-محور-الكون.glb" camera-controls auto-rotate shadow-intensity="0.5" exposure="1" environment-image="neutral"></model-viewer>
 <a class="dl" href="21-محور-الكون.glb" download="21-محور-الكون.glb">نزّل على الجهاز</a></div>
 </div>
+<script>
+function dull(viewer) {
+  if (!viewer.model) return;
+  for (const material of viewer.model.materials) {
+    const corr = Object.getOwnPropertySymbols(material).find(function (s) { return String(s).indexOf('correlated') !== -1; });
+    const mat = corr && material[corr] && material[corr].values().next().value;
+    if (!mat) continue;
+    mat.roughnessMap = null;
+    mat.roughness = 0.82;
+    mat.envMapIntensity = 0.5;
+    mat.needsUpdate = true;
+  }
+}
+document.querySelectorAll('model-viewer').forEach(function (viewer) {
+  viewer.addEventListener('load', function () { dull(viewer); });
+});
+</script>
 </body>
 </html>
