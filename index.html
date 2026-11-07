@@ -11,6 +11,8 @@
 <x-dc>
 <helmet>
 <style>
+@font-face{font-family:'Helvetica';src:local('Helvetica Neue'),local('Helvetica'),url("fonts/Helvetica-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:'Helvetica';src:local('Helvetica Neue Bold'),local('Helvetica-Bold'),url("fonts/Helvetica-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:'Thmanyah Sans';src:url("fonts/thmanyahsans-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
 @font-face{font-family:'Thmanyah Sans';src:url("fonts/thmanyahsans-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Thmanyah Sans';src:url("fonts/thmanyahsans-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
@@ -204,7 +206,9 @@ html[data-theme=dark] .pArchBg:after{background:#141414;opacity:.42}
 .topbar .hSearch{flex:1;max-width:420px}
 .hActs{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
 .brandLock{display:flex;flex-direction:row-reverse;align-items:center;gap:12px;flex:none;color:var(--ink);text-decoration:none;direction:rtl}
-.brandLock .logoImg{height:48px;width:auto;display:block}
+.brandLock .lockImg{height:52px;width:auto;display:block}
+html[data-theme=dark] .lockImg{filter:invert(1)}
+.logoFloat .lockImg{height:40px}
 .brandTx{display:flex;flex-direction:column;line-height:1.1;gap:9px}.brandAr{line-height:1.25}
 .brandAr{font-family:var(--font-display);font-weight:900;font-size:24px}
 .brandEn{font-family:var(--font-ui);font-weight:700;font-size:15px;letter-spacing:.3px;text-align:right}
@@ -250,6 +254,7 @@ html[data-theme=dark] .pArchBg:after{background:#141414;opacity:.42}
 @media(max-width:720px){.productGrid.homeGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 14px}}
 .zpPanel{position:relative;border:1px solid var(--line);border-radius:36px;padding:56px 40px 44px;display:flex;flex-direction:column;align-items:center;gap:6px;overflow:hidden;background:var(--bg);color:var(--ink)}
 html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
+.zpHint{display:none!important}
 .zpTitle{margin:0;font-family:var(--font-display);font-size:clamp(40px,4.6vw,64px);line-height:1.25;font-weight:900;text-align:center}
 .zpHint{margin:0;font-family:var(--font-ui);font-size:14px;color:var(--m3);transition:opacity .3s}
 .zpStage{position:relative;width:min(560px,100%);height:590px;touch-action:pan-y;user-select:none;-webkit-user-select:none;margin-top:12px}
@@ -301,6 +306,9 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .heroBar h1.heroLead{font-family:var(--font-ui);font-weight:700}
 .heroCount{font-size:13px;color:var(--m3);font-weight:600;letter-spacing:1px}
 .heroStage{position:relative;height:300px;margin-top:0;z-index:2}
+.heroSaudi+section{margin-top:clamp(24px,3vw,44px)!important}
+.heroTitle{margin:clamp(18px,2.6vw,34px) 0 0;text-align:center;font-family:var(--font-display);font-weight:900;font-size:clamp(28px,4.4vw,64px);line-height:1.25;white-space:nowrap}
+@media(max-width:560px){.heroTitle{font-size:clamp(22px,7vw,34px)}}
 .saudiBlock{margin:calc(-.66 * clamp(54px,15.5cqi,200px) - 68px) 0 0;position:relative;z-index:1;display:flex;align-items:flex-end;gap:2.2cqi;direction:rtl;padding-top:0}
 
 .haweya{margin:0 0 1.2cqi;font-family:var(--font-display);font-weight:900;font-size:clamp(22px,3.4cqi,48px);line-height:1;letter-spacing:0;color:var(--ink);white-space:nowrap;position:relative}
@@ -311,7 +319,7 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .lifeHead{text-align:start}
 .lifeKicker{font-family:var(--font-ui);font-size:14px;font-weight:500;color:var(--m3)}
 .lifeRows{display:flex;flex-direction:column;gap:16px;margin-top:16px}
-.lifeWrap{overflow:hidden;direction:ltr;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.lifeWrap{overflow:hidden;direction:ltr}
 .lifeTrack{display:flex;width:max-content;animation:lifeMove 16s linear infinite}
 .lifeTrack.rev{animation-direction:reverse}
 @keyframes lifeMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -398,6 +406,22 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .enSig{font-family:var(--font-ui);font-size:14px;opacity:.7;letter-spacing:.3px;transition:opacity .2s}
 .enSig b{font-family:'Thmanyah Serif Display',serif;font-weight:900;font-size:16px}
 .enSig.off{opacity:0}
+
+
+/* معاينة: زخرفة على كامل الموقع (للقرار فقط) */
+.optToggle{position:fixed;left:16px;bottom:16px;z-index:95;height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:var(--bg);color:var(--ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 8px 24px -12px rgba(0,0,0,.35)}
+body.fullOrn:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url(assets/e33da441b1b35d0bd32dd59ffd2d3454.svg) 0 0/auto 92px repeat;opacity:.075}
+body.fullOrn #home-view>section:not(.voice),body.fullOrn #product-view>section{position:relative;z-index:1}
+html[data-theme=dark] body.fullOrn:before{filter:invert(1);opacity:.1}
+/* gift card */
+.enPlate{background:#fffdfa!important;color:#111!important;border-radius:14px!important;box-shadow:0 34px 60px -30px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.06);padding:64px 40px 30px!important;min-height:340px!important;gap:26px!important;transform-origin:50% 100%;position:relative;overflow:hidden}
+.enPlate:before{content:"";position:absolute;left:18px;right:18px;top:16px;height:30px;background:url(assets/e33da441b1b35d0bd32dd59ffd2d3454.svg) repeat-x center/auto 100%;opacity:.5}
+.enPlate:after{content:"";position:absolute;left:18px;right:18px;top:56px;height:1px;background:rgba(0,0,0,.12)}
+.enLine{color:#111;font-weight:700!important;font-size:clamp(30px,3.6vw,48px)!important}
+.enSigImg{height:44px;width:auto;align-self:flex-end;opacity:.9}
+.enShine{display:none}
+.enPhoto img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.enPhoto:hover img{transform:scale(1.04)}
 .enNote{max-width:1080px;margin:16px auto 0;color:rgba(255,255,255,.55);font-size:13px;font-family:var(--font-ui)}
 @media(max-width:720px){.enStage{grid-template-columns:1fr}.enPhoto{min-height:220px}.enPlate{padding:24px;min-height:220px}}
 .voiceLine{margin:56px auto 0;max-width:1080px;text-align:start;font-family:'Thmanyah Serif Display',serif;font-weight:900;font-size:clamp(32px,4.2vw,56px);line-height:1.55;letter-spacing:0}
@@ -458,9 +482,9 @@ footer .frieze:before{filter:invert(1)}
 <button id="theme-tg" class="tg" aria-label="تبديل الوضع الداكن / الفاتح" aria-pressed="false" onClick="{{toggleTheme}}"><span class="tgTrack"></span><span class="tgThumb"><svg class="tgSun" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2.5v4M12 17.5v4M2.5 12h4M17.5 12h4M5.3 5.3l2.8 2.8M15.9 15.9l2.8 2.8M18.7 5.3l-2.8 2.8M8.1 15.9l-2.8 2.8"></path><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"></circle></svg><svg class="tgMoon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"></path><path d="M17.5 3.5l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z"></path></svg></span></button>
 <button aria-label="السلة" style="height:46px;padding:0 18px;border-radius:999px;border:0;background:var(--ink);color:var(--on-ink);font:inherit;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 12H6z"></path><path d="M9 8a3 3 0 016 0"></path></svg>السلة <b id="cart-n" style="display:inline-block;min-width:1ch">0</b></button>
 </div>
-<a href="#" class="brandLock" aria-label="بي بوتيك — btq.sa" onClick="{{goHome}}"><img class="logoImg" src="assets/092586564e2991a0b88225eca7050eb1.png" alt=""><span class="brandTx"><b class="brandAr">بي بوتيك</b><span class="brandEn" dir="ltr">btq.sa</span></span></a>
+<a href="#" class="brandLock" aria-label="بي بوتيك — btq.sa" onClick="{{goHome}}"><img class="lockImg" src="assets/logo-lockup.svg" alt="بي بوتيك — btq.sa"></a>
 </header>
-<a href="#" id="logo-float" class="logoFloat" aria-label="بي بوتيك — الرئيسية" tabindex="-1"><img class="logoImg" src="assets/092586564e2991a0b88225eca7050eb1.png" alt=""><span class="brandTx"><b class="brandAr">بي بوتيك</b><span class="brandEn" dir="ltr">btq.sa</span></span></a>
+<a href="#" id="logo-float" class="logoFloat" aria-label="بي بوتيك — الرئيسية" tabindex="-1"><img class="lockImg" src="assets/logo-lockup.svg" alt="بي بوتيك — btq.sa"></a>
 <div id="catScrim" class="catScrim"></div>
 <aside id="catDrawer" class="catDrawer" aria-label="تصنيفات المتجر" aria-hidden="true">
 <div class="catHead"><b>تصنيفات المتجر</b><button id="catClose" aria-label="إغلاق">&#215;</button></div>
@@ -507,8 +531,7 @@ footer .frieze:before{filter:invert(1)}
 <div id="home-view">
 <section class="heroSaudi">
 <div class="heroBar">
-<h1 class="heroLead">قطع حصرية</h1>
-<div style="display:flex;align-items:center;gap:18px">
+<div style="display:flex;align-items:center;gap:18px;margin-inline-start:auto">
 <span class="heroCount" dir="ltr">{{counter}}</span>
 <button onClick="{{discover}}" style="background:var(--ink);color:var(--on-ink);height:48px;padding:0 24px;border:0;border-radius:999px;display:flex;align-items:center;gap:12px;font-family:var(--font-ui);font-weight:500;font-size:16px;cursor:pointer">اكتشف القطعة<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12H4M10 6l-6 6 6 6"></path></svg></button>
 </div>
@@ -522,17 +545,13 @@ footer .frieze:before{filter:invert(1)}
 <model-viewer id="hero-viewer" src="{{cur.src}}" poster="{{cur.poster}}" alt="{{cur.alt}}" min-camera-orbit="-75deg 55deg auto" max-camera-orbit="75deg 100deg 600%" camera-controls="" disable-zoom="" disable-pan="" interaction-prompt="none" shadow-intensity="0" exposure="1" environment-image="neutral" camera-orbit="0deg 76deg {{cur.orbitR}}" reveal="auto" style="position:absolute;top:0;left:50%;margin-left:-140px;width:280px;height:290px;background:transparent;cursor:grab"></model-viewer>
 </div>
 </div>
-<div class="saudiBlock">
-<p class="haweya">بهوية</p>
-<p class="saudiWord" id="saudiWord" data-w="سع{K}ودية">سعـــــــــــودية</p>
-</div>
+<h1 class="heroTitle">قطع حصرية بهوية سعودية</h1>
 </section>
 
 <section class="selSec" style="padding:0 48px 0">
 <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-end;margin-top:16px">
 <div>
-<div style="font-size:14px;color:var(--m3);font-weight:500">مختارات</div>
-<h2 style="margin:6px 0 0;font-family:var(--font-display);font-size:clamp(32px,3.4vw,48px);line-height:1.3;font-weight:900">قــطــع تــحــكــي المــكــان</h2>
+
 </div>
 <a href="#" onClick="{{openAll}}" style="height:50px;padding:0 26px;border:1px solid var(--ink);border-radius:999px;display:flex;align-items:center;gap:10px;font-weight:500">كل المنتجات<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12H4M10 6l-6 6 6 6"></path></svg></a>
 </div>
@@ -550,9 +569,7 @@ footer .frieze:before{filter:invert(1)}
 </section>
 
 <section style="padding:8px 48px 72px">
-<div class="lifeHead">
-<h2 style="margin:0;font-family:var(--font-display);font-size:clamp(36px,4.2vw,58px);line-height:1.3;font-weight:900">تـمـشـي مع الـيـوم</h2>
-</div>
+
 <div class="lifeRows">
 <div class="lifeWrap">
 <div class="lifeTrack">
@@ -573,8 +590,7 @@ footer .frieze:before{filter:invert(1)}
 
 <section class="zp" style="padding:0 48px 0">
 <div id="zp-panel" class="zpPanel">
-<h2 class="zpTitle">اســكــب قــهــوتــك</h2>
-<p class="zpHint" id="zp-hint">حاول تسكب في الكوب… إذا قدرت</p>
+<p class="zpHint" id="zp-hint"></p>
 <div id="zp-stage" class="zpStage">
 <div class="zpShadow" aria-hidden="true"></div>
 <div id="zp-mug" class="zpMug">
@@ -594,7 +610,7 @@ footer .frieze:before{filter:invert(1)}
 </section>
 
 <section class="voice engr" id="engrave">
-<div class="enHead"><span class="enKick">هدية بنقشك</span><h2 class="enTitle">اكتب إهداءك، ونحفره على القطعة</h2></div>
+<div class="enHead"><h2 class="enTitle">اكتب إهداءك، ونرفقه في كرت مع مشترياتك</h2></div>
 <div class="enChips" id="en-chips" role="group" aria-label="اختر القطعة"><button class="enChip on" type="button" data-i="0" data-img="assets/set-cup.jpg" data-n="كوب السفر"><img src="assets/set-cup.jpg" alt=""><span>كوب السفر</span></button><button class="enChip" type="button" data-i="1" data-img="assets/set-watches.jpg" data-n="ساعات سعودي تايم"><img src="assets/set-watches.jpg" alt=""><span>ساعات سعودي تايم</span></button><button class="enChip" type="button" data-i="2" data-img="assets/set-globe.jpg" data-n="محور الكون"><img src="assets/set-globe.jpg" alt=""><span>محور الكون</span></button><button class="enChip" type="button" data-i="3" data-img="assets/set-bisht.jpg" data-n="مجسم البشت"><img src="assets/set-bisht.jpg" alt=""><span>مجسم البشت</span></button><button class="enChip" type="button" data-i="4" data-img="assets/set-ring.jpg" data-n="خاتم ذهبي"><img src="assets/set-ring.jpg" alt=""><span>خاتم ذهبي</span></button><button class="enChip" type="button" data-i="5" data-img="assets/set-heart.jpg" data-n="قلادة حب"><img src="assets/set-heart.jpg" alt=""><span>قلادة حب</span></button><button class="enChip" type="button" data-i="6" data-img="assets/set-bag.jpg" data-n="الحقيبة"><img src="assets/set-bag.jpg" alt=""><span>الحقيبة</span></button></div>
 <div class="vBar">
 <div class="vCell enWide"><span>إهداؤك</span><input id="en-text" class="enInput" maxlength="26" placeholder="اكتب إهداءك" aria-label="نص الإهداء" autocomplete="off"></div>
@@ -603,37 +619,30 @@ footer .frieze:before{filter:invert(1)}
 <button class="vAl" type="button" data-a="center" aria-label="وسط"><svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 1h14M0 5h18M3 9h12M1 13h16"></path></svg></button>
 <button class="vAl" type="button" data-a="left" aria-label="يسار"><svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 1h18M0 5h12M0 9h18M0 13h10"></path></svg></button>
 </div></div>
-<div class="vCell"><span>توقيع بي بوتيك</span><button class="vSwitch on" id="en-sig" type="button" aria-pressed="true" aria-label="توقيع بي بوتيك"><i></i></button></div>
 </div>
 <div class="enSugs" id="en-sugs"><button type="button" class="enSug" data-t="لفيصل، من القلب">لفيصل، من القلب</button><button type="button" class="enSug" data-t="إلى أمي">إلى أمي</button><button type="button" class="enSug" data-t="مبروك التخرج">مبروك التخرج</button><button type="button" class="enSug" data-t="بيتنا">بيتنا</button><button type="button" class="enSug" data-t="لك وحدك">لك وحدك</button></div>
 <div class="enStage" id="en-stage">
 <div class="enPhoto" id="en-photo"><img id="en-img" src="assets/set-cup.jpg" alt=""><span class="enTag" id="en-tag">كوب السفر</span></div>
-<div class="enPlate" id="en-plate" data-f="silver"><span class="enScrew s1"></span><span class="enScrew s2"></span><span class="enScrew s3"></span><span class="enScrew s4"></span>
-<div class="enTxt" id="en-txt"><p id="en-line" class="enLine"></p><i id="en-laser" class="enLaser"></i></div>
-<span id="en-sg" class="enSig"><b>بي بوتيك</b> · btq.sa</span><i class="enShine" id="en-shine"></i></div>
-</div>
-<p class="enNote">معاينة تقريبية للنقش — نأكد معك الشكل النهائي قبل التنفيذ.</p>
-<div class="vDots" role="group" aria-label="لون المعدن" id="en-dots">
-<button class="vDot on" type="button" data-f="silver" aria-label="فضي" style="background:#d9d9d9"></button>
-<button class="vDot" type="button" data-f="gray" aria-label="رمادي" style="background:#8a8a8a"></button>
-<button class="vDot" type="button" data-f="black" aria-label="أسود" style="background:#1b1b1b"></button>
+<div class="enPlate" id="en-plate" data-f="silver">
+<div class="enTxt" id="en-txt"><p id="en-line" class="enLine"></p></div>
+<img id="en-sg" class="enSigImg" src="assets/logo-lockup.svg" alt="بي بوتيك"><i class="enShine" id="en-shine"></i></div>
 </div>
 </section>
 
-</div><footer style="background:var(--bar);color:var(--bar-t);margin-top:0">
+</div><button type="button" class="optToggle" id="optToggle">معاينة: زخرفة على كامل الموقع</button><footer style="background:var(--bar);color:var(--bar-t);margin-top:0">
 <div class="frieze" aria-hidden="true"></div>
 <div style="padding:56px 48px 28px;display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between">
 <div style="flex:1 1 280px;max-width:360px">
-<img src="assets/092586564e2991a0b88225eca7050eb1.png" alt="" style="height:60px;width:auto;display:block;filter:invert(1)">
-<p style="margin:20px 0 0;font-size:16px;line-height:1.9;color:var(--bar-t)">قطع مختارة بعناية، من الجزيرة إلى مكانك.</p>
-<form onsubmit="return false" style="display:flex;gap:8px;margin-top:22px"><input type="email" placeholder="بريدك للوصول الأول للجديد" aria-label="البريد الإلكتروني" style="flex:1;min-width:0;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#f5f5f5;padding:0 18px;font:inherit;font-size:14px;outline:0"><button type="submit" style="height:46px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#111;font:inherit;font-weight:500;font-size:14px;cursor:pointer">اشترك</button></form>
+<img src="assets/logo-lockup.svg" alt="بي بوتيك — btq.sa" style="height:64px;width:auto;display:block;filter:invert(1)">
+<p style="margin:20px 0 0;font-size:16px;line-height:1.9;color:var(--bar-t)">قطع حصرية بهوية سعودية</p>
+<form onsubmit="return false" style="display:flex;gap:8px;margin-top:22px"><input type="email" placeholder="بريدك الإلكتروني" aria-label="البريد الإلكتروني" style="flex:1;min-width:0;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#f5f5f5;padding:0 18px;font:inherit;font-size:14px;outline:0"><button type="submit" style="height:46px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#111;font:inherit;font-weight:500;font-size:14px;cursor:pointer">اشترك</button></form>
 </div>
 <div style="display:flex;flex-wrap:wrap;gap:40px 64px;font-size:15px">
 <div style="display:flex;flex-direction:column;gap:12px"><b style="color:#fff;font-weight:500">تسوّق</b><a href="#">أكواب</a><a href="#">ساعات</a><a href="#">تحف</a><a href="#">ذهب ومجوهرات</a></div>
 <div style="display:flex;flex-direction:column;gap:12px"><b style="color:#fff;font-weight:500">المساعدة</b><a href="#">سياسة الاستبدال والاسترجاع</a><a href="#">سياسة الاستخدام والخصوصية</a><a href="#">تواصل معنا</a></div>
 </div>
 </div>
-<div style="border-top:1px solid rgba(255,255,255,.16);padding:18px 48px 26px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:#a3a3a3"><span>© 2026 btq.sa — جميع الحقوق محفوظة</span><span>صُنع بحب في السعودية</span></div>
+<div style="border-top:1px solid rgba(255,255,255,.16);padding:18px 48px 26px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:#a3a3a3"><span>© 2026 btq.sa — جميع الحقوق محفوظة</span><span>قطع حصرية من تصميم البوبح</span></div>
 </footer>
 </div>
 </x-dc>
@@ -1552,24 +1561,21 @@ function $(id){return document.getElementById(id)}
 function on(btns,b){[].forEach.call(btns,function(x){x.classList.toggle('on',x===b)})}
 var DEF='لفيصل، من القلب',tries=0,iv=setInterval(function(){var x=$('en-text');if(x&&!x.dataset.init){x.dataset.init=1;x.value=DEF;$('en-line').textContent=DEF;watch()}if(++tries>60||(x&&x.dataset.init))clearInterval(iv)},150);
 var run=null,tmr=null,seen=false;
-function engrave(){var ln=$('en-line'),lz=$('en-laser'),tx=$('en-txt');if(!ln||!ln.animate)return;
-if(run){run.forEach(function(a){try{a.cancel()}catch(e){}})}
-var d=Math.min(2200,700+ln.textContent.length*80),ease='cubic-bezier(.45,.05,.3,1)';
-var a1=ln.animate([{clipPath:'inset(-45% -15% -45% 100%)',filter:'brightness(2.4) blur(.5px)'},{clipPath:'inset(-45% -15% -45% -15%)',filter:'brightness(1) blur(0)'}],{duration:d,easing:ease});
-var a2=lz.animate([{right:'0%',opacity:1},{right:'calc(100% - 3px)',opacity:1}],{duration:d,easing:ease});
-var a3=lz.animate([{opacity:0},{opacity:1,offset:.06},{opacity:1,offset:.94},{opacity:0}],{duration:d,easing:'linear'});
-var a4=$('en-shine').animate([{left:'-40%',opacity:.9},{left:'120%',opacity:.9}],{duration:900,delay:d-200,easing:'ease-out'});
-run=[a1,a2,a3,a4]}
+function engrave(first){var ln=$('en-line'),pl=$('en-plate');if(!ln||!ln.animate)return;
+if(run){run.forEach(function(x){try{x.cancel()}catch(e){}})}
+var d=Math.min(2200,600+ln.textContent.length*90),run2=[];
+if(first)run2.push(pl.animate([{transform:'translateY(44px) rotate(3.5deg)',opacity:0},{transform:'none',opacity:1}],{duration:700,easing:'cubic-bezier(.2,.9,.3,1.08)'}));
+run2.push(ln.animate([{clipPath:'inset(-30% -10% -30% 100%)'},{clipPath:'inset(-30% -10% -30% -10%)'}],{duration:d,delay:first?420:0,easing:'cubic-bezier(.5,.1,.3,1)',fill:'backwards'}));
+run=run2}
 function later(ms){clearTimeout(tmr);tmr=setTimeout(engrave,ms)}
-function watch(){if(seen||!window.IntersectionObserver)return;seen=true;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){engrave();io.disconnect()}})},{threshold:.35});io.observe($('en-stage'))}
+function watch(){if(seen||!window.IntersectionObserver)return;seen=true;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){engrave(true);io.disconnect()}})},{threshold:.35});io.observe($('en-stage'))}
 function setText(t){var x=$('en-text');x.value=t;$('en-line').textContent=t.trim()||'اكتب إهداءك';later(0)}
 document.addEventListener('input',function(e){if(e.target.id==='en-text'){$('en-line').textContent=e.target.value.trim()||'اكتب إهداءك';later(450)}});
 document.addEventListener('click',function(e){var t=e.target;if(!t.closest)return;
-var ch=t.closest('#en-chips .enChip');if(ch){on(ch.parentNode.children,ch);var im=$('en-img'),ph=$('en-photo');im.src=ch.dataset.img;$('en-tag').textContent=ch.dataset.n;ph.classList.remove('slide');void ph.offsetWidth;ph.classList.add('slide');var pl=$('en-plate');pl.classList.remove('pop');void pl.offsetWidth;pl.classList.add('pop');later(120);return}
+var ch=t.closest('#en-chips .enChip');if(ch){on(ch.parentNode.children,ch);var im=$('en-img'),ph=$('en-photo');im.src=ch.dataset.img;$('en-tag').textContent=ch.dataset.n;ph.classList.remove('slide');void ph.offsetWidth;ph.classList.add('slide');engrave(true);return}
 var sg=t.closest('#en-sugs .enSug');if(sg){setText(sg.dataset.t);return}
 var al=t.closest('#en-al button');if(al){on(al.parentNode.children,al);$('en-txt').style.textAlign=al.dataset.a;$('en-plate').style.textAlign=al.dataset.a;return}
-var sw=t.closest('#en-sig');if(sw){var o=!sw.classList.contains('on');sw.classList.toggle('on',o);sw.setAttribute('aria-pressed',o);$('en-sg').classList.toggle('off',!o);return}
-var d=t.closest('#en-dots button');if(d){on(d.parentNode.children,d);$('en-plate').setAttribute('data-f',d.dataset.f);later(60)}});
+});
 })();
 </script>
 <script>
@@ -1620,5 +1626,6 @@ window.addEventListener('scroll',f,{passive:true});window.addEventListener('resi
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('#logo-float');if(!a)return;e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#optToggle');if(!b)return;var on=document.body.classList.toggle('fullOrn');b.textContent=on?'رجوع للتصميم الحالي':'معاينة: زخرفة على كامل الموقع'});</script>
 </body>
 </html>
