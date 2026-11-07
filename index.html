@@ -327,7 +327,7 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .heroStage{position:relative;height:300px;margin-top:0;z-index:2}
 .heroSaudi+section{margin-top:clamp(24px,3vw,44px)!important}
 .heroTitle{margin:clamp(18px,2.6vw,34px) 0 0;text-align:center;font-family:var(--font-display);font-weight:900;font-size:clamp(28px,4.4vw,64px);line-height:1.25;white-space:nowrap}
-@media(max-width:560px){.heroTitle{font-size:clamp(22px,7vw,34px)}}
+@media(max-width:560px){.heroTitle{font-size:clamp(26px,7.4vw,36px);white-space:normal}}
 .saudiBlock{margin:calc(-.66 * clamp(54px,15.5cqi,200px) - 68px) 0 0;position:relative;z-index:1;display:flex;align-items:flex-end;gap:2.2cqi;direction:rtl;padding-top:0}
 
 .haweya{margin:0 0 1.2cqi;font-family:var(--font-display);font-weight:900;font-size:clamp(22px,3.4cqi,48px);line-height:1;letter-spacing:0;color:var(--ink);white-space:nowrap;position:relative}
@@ -373,7 +373,7 @@ html[data-theme=dark] .zpPanel{background:#111;border-color:#2a2a2a}
 .ipLike{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:650;flex:none;padding-top:1px}
 .ipLike svg{display:block}
 .ipRow p{margin:0;font-size:11px;font-weight:500;line-height:1.55;text-align:start}
-@media(max-width:720px){.lifeCard{width:220px;height:360px}.lifeCard.wide{width:620px}.ipPhone{width:176px;height:312px}.ipHead b{font-size:13px}.ipRow p{font-size:9px}.ipCard{padding:7px 8px;border-radius:12px}.ipStack{gap:6px;margin:8px 8px 0}}
+@media(max-width:720px){.lifeCard{width:68vw;height:88vw}.lifeCard.wide{width:88vw}.ipPhone{width:176px;height:312px}.ipHead b{font-size:13px}.ipRow p{font-size:9px}.ipCard{padding:7px 8px;border-radius:12px}.ipStack{gap:6px;margin:8px 8px 0}.selSec{padding-left:16px!important;padding-right:16px!important}#product-view>section{padding:16px 16px 28px!important}#pv-stage{height:auto!important}#pv-slot{position:relative!important;left:0!important;top:0!important;transform:none!important;width:min(100%,420px)!important;margin:0 auto 12px!important}}
 @media(prefers-reduced-motion:reduce){.lifeTrack{animation:none}}
 .voice{background:#0a0a0a;color:#fff;padding:64px 48px 72px}
 .vBar{display:flex;gap:22px;max-width:980px;margin:0 auto;align-items:flex-end}
@@ -587,7 +587,7 @@ footer .frieze:before{filter:invert(1)}
 <sc-for list="{{stage}}" as="p" hint-placeholder-count="5">
 <button aria-label="{{p.name}}" tabindex="{{p.tab}}" onClick="{{p.pick}}" style="{{p.stageStyle}}"><img src="{{p.poster}}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;transform:scale({{p.fit}})"></button>
 </sc-for>
-<model-viewer id="hero-viewer" src="{{cur.src}}" poster="{{cur.poster}}" alt="{{cur.alt}}" min-camera-orbit="-75deg 55deg auto" max-camera-orbit="75deg 100deg 600%" camera-controls="" disable-zoom="" disable-pan="" interaction-prompt="none" shadow-intensity="0" exposure="1" environment-image="neutral" camera-orbit="0deg 76deg {{cur.orbitR}}" reveal="auto" style="position:absolute;top:0;left:50%;margin-left:-140px;width:280px;height:290px;background:transparent;cursor:grab;z-index:2"></model-viewer>
+<model-viewer id="hero-viewer" src="{{cur.src}}" poster="{{cur.poster}}" alt="{{cur.alt}}" min-camera-orbit="-75deg 55deg auto" max-camera-orbit="75deg 100deg 600%" camera-controls="" disable-zoom="" disable-pan="" interaction-prompt="none" shadow-intensity="0" exposure="1" environment-image="neutral" camera-orbit="0deg 76deg {{cur.orbitR}}" reveal="auto" style="position:absolute;top:0;left:50%;margin-left:-140px;width:280px;height:290px;background:transparent;cursor:grab;z-index:2;direction:ltr"></model-viewer>
 </div>
 </div>
 <h1 class="heroTitle">قطع حصرية بهوية سعودية</h1>
@@ -1484,6 +1484,16 @@ class Component extends DCLogic {
     setTimeout(() => this.watchPour(), 400);
     try { customElements.get('model-viewer').meshoptDecoderLocation = 'assets/ea9a1fc9a7eb92d851502e4976a30459.js'; } catch (e) {}
     this.heroMap().forEach((pi) => this.loadModel(pi));
+    this._fit = () => {
+      const st = document.getElementById('hero-stage');
+      const w = st && st.clientWidth;
+      this.fitHero();
+      if (!w || Math.abs(w - (this._stageW || 0)) < 12) return;
+      this._stageW = w;
+      this.setState({});
+    };
+    window.addEventListener('resize', this._fit);
+    this._fit();
     this._hover = false;
     this._paused = false;
     const s = (this.props.rotateEvery ?? 9) * 1000;
@@ -1494,7 +1504,27 @@ class Component extends DCLogic {
       }, s);
     }
   }
-  componentWillUnmount() { clearInterval(this._timer); clearInterval(this._swing); clearInterval(this._pvTimer); clearInterval(this._pvWait); clearTimeout(this._pt); if (this._io1) this._io1.disconnect(); if (this._io2) this._io2.disconnect(); if (this._io3) this._io3.disconnect(); clearInterval(this._gTick); }
+  stageBox() {
+    const st = document.getElementById('hero-stage');
+    const w = Math.max(280, (st && st.clientWidth) || (typeof innerWidth === 'number' ? Math.min(innerWidth, 900) : 900));
+    const viewerW = Math.round(Math.min(280, Math.max(168, w * 0.62)));
+    const viewerH = Math.round(viewerW * 290 / 280);
+    return { viewerW: viewerW, viewerH: viewerH, slot: Math.round(viewerW * 0.75), gap: Math.round(viewerW * 0.72), top: Math.max(6, Math.round(viewerH * 0.05)) };
+  }
+  fitHero() {
+    const hv = document.getElementById('hero-viewer');
+    const st = document.getElementById('hero-stage');
+    if (!hv || !st) return;
+    const m = this.stageBox();
+    hv.style.direction = 'ltr';
+    hv.style.width = m.viewerW + 'px';
+    hv.style.height = m.viewerH + 'px';
+    hv.style.marginLeft = (-m.viewerW / 2) + 'px';
+    hv.style.left = '50%';
+    hv.style.top = '0px';
+    st.style.height = Math.max(m.viewerH, m.slot + m.top + 8) + 'px';
+  }
+  componentWillUnmount() { clearInterval(this._timer); clearInterval(this._swing); clearInterval(this._pvTimer); clearInterval(this._pvWait); clearTimeout(this._pt); if (this._io1) this._io1.disconnect(); if (this._io2) this._io2.disconnect(); if (this._io3) this._io3.disconnect(); clearInterval(this._gTick); if (this._fit) window.removeEventListener('resize', this._fit); }
   pieces() {
     const P = '[السعر] ر.س';
     return [
@@ -1580,6 +1610,7 @@ class Component extends DCLogic {
     });
   }
   componentDidUpdate() {
+    this.fitHero();
     this.placeSideModels();
     if (this._view) this.showView(this._view);
     const cidx = (this.state && this.state.idx) || 0;
@@ -1598,17 +1629,18 @@ class Component extends DCLogic {
     const idx = (this.state && this.state.idx) || 0;
     const n = list.length;
     const choose = (i) => { this._paused = true; this.loadModel(map[i]); this.loadModel(map[(i + 1) % n]); this.setState({ idx: i }); };
+    const box = this.stageBox();
     const stage = list.map((p, i) => {
       let off = (((i - idx) % n) + n) % n;
       if (off > n / 2) off -= n;
       const ab = Math.abs(off);
-      const x = -off * 215;
+      const x = -off * box.gap;
       const sc = ab === 0 ? 1 : ab === 1 ? 0.62 : 0.42;
       const op = ab === 0 ? 0 : ab === 1 ? 0.9 : ab === 2 ? 0.4 : 0;
       const bl = ab === 1 ? 1.5 : 3.5;
       const live = /\.glb(\?|$)/i.test(p.data || '');
       const filt = live ? 'none' : 'blur(' + bl + 'px) brightness(.84) contrast(1.12) saturate(.85) drop-shadow(0 14px 14px rgba(0,0,0,.18))';
-      const stageStyle = 'position:absolute;top:18px;left:50%;width:210px;height:210px;margin-left:-105px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:' + filt + ';pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
+      const stageStyle = 'position:absolute;top:' + box.top + 'px;left:50%;width:' + box.slot + 'px;height:' + box.slot + 'px;margin-left:-' + (box.slot / 2) + 'px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:' + filt + ';pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
       return { name: p.name, poster: p.poster, fit: p.fit || 1, stageStyle, tab: ab === 1 ? 0 : -1, pick: () => choose(i) };
     });
     const pieces = list.map((p, i) => ({
