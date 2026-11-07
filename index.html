@@ -1518,7 +1518,7 @@ class Component extends DCLogic {
       { shot: 'assets/set-band.jpg?v=1', name: 'سير الساعة', sub: 'سوار معدني', price: '119 ر.س', alt: 'سوار ساعة معدني أسود', desc: 'سوار معدني أسود بنقش متداخل.', gridOnly: true },
       { shot: 'assets/set-scarf.jpg?v=1', name: 'وشاح السعودية', sub: 'ثلاثة أوشحة', price: '180 ر.س', alt: 'ثلاثة أوشحة بنقش هندسي', desc: 'ثلاثة أوشحة بنقش هندسي: أسود، وأخضر، وبنفسجي.', gridOnly: true },
       { data: '3d/04-العلا.glb', poster: 'assets/set-wallet.jpg?v=1', shot: 'assets/set-wallet.jpg?v=1', tint: '#d8d4cf', name: 'العلا', sub: 'محفظة بطاقات', price: P, alt: 'محفظة بطاقات جلدية', desc: 'محفظة بطاقات من الجلد.', orbitR: '165%' },
-      { data: '3d/02-قلادة-جدة.glb', poster: 'assets/set-jeddah.jpg?v=1', shot: 'assets/set-jeddah.jpg?v=1', tint: '#d7d7d7', name: 'قلادة جدة', sub: 'ستانلس ستيل', price: '220 ر.س', alt: 'قلادة فضية على شكل كلمة جدة', desc: 'قلادة ستانلس ستيل على شكل كلمة جدة.', orbitR: '155%' },
+      { data: '3d/02-قلادة-جدة.glb', poster: 'assets/set-jeddah.png?v=2', shot: 'assets/set-jeddah.jpg?v=1', tint: '#d7d7d7', name: 'قلادة جدة', sub: 'ستانلس ستيل', price: '220 ر.س', alt: 'قلادة فضية على شكل كلمة جدة', desc: 'قلادة ستانلس ستيل على شكل كلمة جدة.', orbitR: '140%' },
       { shot: 'assets/set-bag.jpg?v=1', name: 'الحقيبة', sub: 'حقيبة كتف', price: P, alt: 'حقيبة سوداء بنقش أبيض', desc: 'حقيبة كتف سوداء بنقش أبيض.', gridOnly: true }
     ];
   }
@@ -1536,7 +1536,7 @@ class Component extends DCLogic {
     if (!host) return;
     const specs = [
       { name: 'العلا', orbit: '38deg 68deg 145%' },
-      { name: 'قلادة جدة', orbit: '22deg 74deg 150%' }
+      { name: 'قلادة جدة', orbit: '36deg 70deg 130%' }
     ];
     this._sideView = this._sideView || {};
     specs.forEach((spec) => {
@@ -1571,10 +1571,12 @@ class Component extends DCLogic {
       v.style.marginLeft = btn.style.marginLeft;
       v.style.transform = btn.style.transform;
       v.style.opacity = btn.style.opacity;
-      v.style.filter = btn.style.filter;
-      v.style.transition = btn.style.transition;
+      v.style.filter = 'none';
+      v.style.transition = 'transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s';
       const img = btn.querySelector('img');
-      if (img) img.style.visibility = 'hidden';
+      const hide = () => { if (img) img.style.visibility = 'hidden'; };
+      if (v.loaded) hide();
+      else v.addEventListener('load', hide, { once: true });
     });
   }
   componentDidUpdate() {
@@ -1604,7 +1606,9 @@ class Component extends DCLogic {
       const sc = ab === 0 ? 1 : ab === 1 ? 0.62 : 0.42;
       const op = ab === 0 ? 0 : ab === 1 ? 0.9 : ab === 2 ? 0.4 : 0;
       const bl = ab === 1 ? 1.5 : 3.5;
-      const stageStyle = 'position:absolute;top:18px;left:50%;width:210px;height:210px;margin-left:-105px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:blur(' + bl + 'px) brightness(.84) contrast(1.12) saturate(.85) drop-shadow(0 14px 14px rgba(0,0,0,.18));pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
+      const live = /\.glb(\?|$)/i.test(p.data || '');
+      const filt = live ? 'none' : 'blur(' + bl + 'px) brightness(.84) contrast(1.12) saturate(.85) drop-shadow(0 14px 14px rgba(0,0,0,.18))';
+      const stageStyle = 'position:absolute;top:18px;left:50%;width:210px;height:210px;margin-left:-105px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s,filter .5s;transform:translateX(' + x + 'px) scale(' + sc + ');opacity:' + op + ';filter:' + filt + ';pointer-events:' + (ab === 1 || ab === 2 ? 'auto' : 'none');
       return { name: p.name, poster: p.poster, fit: p.fit || 1, stageStyle, tab: ab === 1 ? 0 : -1, pick: () => choose(i) };
     });
     const pieces = list.map((p, i) => ({
